@@ -1,0 +1,1 @@
+font-family:LM Precious Sans;font-style:normal;font-weight:100;
