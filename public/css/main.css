@@ -332,6 +332,31 @@ footer{
   border: none;
 }
 
+.panel-body-text form{
+  font-size: 24px;
+}
+
+.panel-body-text form select{
+  width: 300px;
+}
+
+.panel-body-text form input{
+  width: 300px;
+}
+
+.floatLeft{
+  float: left;
+}
+
+.floatRight{
+  float: right;
+}
+
+input[type=radio]{
+  float: left;
+  width: 50px !important;
+}
+
 @media screen and (max-width: 600px){
   #pageTagline{
     font-size: 67px;

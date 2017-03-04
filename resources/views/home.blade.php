@@ -18,7 +18,10 @@
 
                     <div class="panel-body" class="openSans">
                         <div class="panel-body-text">
-                            View my approved items
+                            <ul style="font-size: 22px;">
+                                <li><a href={{url('/add')}}>Report a found item</a></li>
+                                <li>View my approved items</li>
+                            </ul>
                         </div>
                     </div>
                 </div>

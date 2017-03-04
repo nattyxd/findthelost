@@ -26,5 +26,7 @@ Route::group(['middleware' => 'web'], function () {
     // Login/home routes
     Auth::routes();
     Route::get('/home', 'HomeController@index');
+    Route::get('/add', 'HomeController@add');
+    Route::post('/add', 'HomeController@submitadd');
 
 });
