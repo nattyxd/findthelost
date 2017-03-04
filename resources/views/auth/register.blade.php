@@ -1,12 +1,23 @@
-@extends('layouts.app')
+@extends('layouts.template')
+
+@section('title', 'Register')
+
+@section('aestheticHeader')
+@stop
 
 @section('content')
+<section id="pageTagline">
+          <div class="thePageTagLine">
+            Register for&nbsp;<span class="logoGreen italic openSans reducedSpacing">fi</span><span class="italic openSans">l</span><span class="italic openSans minus2px">o</span>!
+          </div>
+      </section>
+      <section id="coreContent" class="openSans">
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
-                <div class="panel-body">
+                <div class="panel-heading" style="text-align: center">We just need some basic information</div>
+                <div class="panel-body" style="font-size: 18px">
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
 

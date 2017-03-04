@@ -1,14 +1,25 @@
-@extends('layouts.app')
+@extends('layouts.template')
+
+@section('title', 'My Account')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+      <section id="pageTagline">
+          <div class="thePageTagLine">
+            {{strstr(Auth::user()->name . ' ', ' ', true )}} 's Dashboard
+          </div>
+      </section>
+<div class="container-fluid">
+    <div class="row" style="">
+        <div class="col-xl-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+                <div class="panel-heading">
+                    <div class="panel-heading-text">Quick Actions</div>
+                </div>
 
-                <div class="panel-body">
-                    You are logged in!
+                <div class="panel-body" class="openSans">
+                    <div class="panel-body-text">
+                        You are logged in!
+                    </div>
                 </div>
             </div>
         </div>
