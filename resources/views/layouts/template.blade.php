@@ -26,7 +26,7 @@
       <div id="logo"><a href={{url('/')}}><span class="logoGreen italic openSans reducedSpacing">fi</span><span class="italic openSans">l</span><span class="italic openSans minus2px">o</span><span style="font-size: 50%;">&nbsp;</span>:<span style="font-size: 50%;">&nbsp;</span><span class="logoGreen veryReducedSpacing">find</span><span class="minus2px reducedSpacing">the</span><span class="minus3px veryReducedSpacing" style="font-weight: 300;">lost</span></a></div>
       <nav class="openSans">
         <ul>
-          <li><a href="#">View Items</a></li>
+          <li><a href="{{url('lostitems')}}">View Items</a></li>
           <?php
               $user = Auth::user();
               if($user == null){
@@ -34,7 +34,7 @@
                 echo '<li><a href="' . route('register') . '">Register</a></li>';
               }
               else{
-                echo "<li><img src='img/generic_user.svg' width='40' height='40' /> &nbsp;" . strstr(Auth::user()->name . ' ', ' ', true ) . "'s account</li>";
+                echo "<li><a href='" . url("/home") . "'><img src='img/generic_user.svg' width='40' height='40' /> &nbsp;" . strstr(Auth::user()->name . ' ', ' ', true ) . "'s account</li>";
                 echo '<li><a href="' . route('logout') . '">Logout</a></li>';
               }
             ?>

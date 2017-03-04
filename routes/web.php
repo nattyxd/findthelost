@@ -15,10 +15,15 @@
 
 Route::group(['middleware' => 'web'], function () {
 
-    
     Route::get('/', function () {
         return view('index');
     });
+
+    Route::get('/lostitems', function(){
+        return view ('lostitems');
+    });
+
+    // Login/home routes
     Auth::routes();
     Route::get('/home', 'HomeController@index');
 
