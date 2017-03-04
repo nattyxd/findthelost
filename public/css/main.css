@@ -357,6 +357,12 @@ input[type=radio]{
   width: 50px !important;
 }
 
+.lostItem{
+  width: 100%;
+  height: 200px;
+  background-color: red;
+}
+
 @media screen and (max-width: 600px){
   #pageTagline{
     font-size: 67px;

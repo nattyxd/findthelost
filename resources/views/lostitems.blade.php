@@ -15,22 +15,29 @@
     <div class="container-fluid">
         <div class="row" style="">
             <div class="col-xl-12">
+                
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <div class="panel-heading-text"><img src="img/filter.svg" width="35" height="35"/>Filter lost items</div>
+                        <div class="panel-heading-text"><img src="img/filter.svg" width="35" height="35"/>Filter items (new search)</div>
                     </div>
                     <div class="panel-body" class="openSans">
-                        <div class="panel-body-text">
-                          <form action="/admin/cities" method="POST">
+                        <div class="panel-body-text" style="margin-top: -30px">
+                          <form action="/lostitems" method="GET">
                               {{ csrf_field() }}
                               <br />
                           <div class="floatLeft" style="width: 250px;">
-                            <p>Currently Viewing:</p>
+                            <p>Order:</p>
                             <p>Categories:</p>
                             <p>City:</p>
+                            <p>Lost or found?</p>
                           </div>
                           <div class="floatLeft" style="width: 200px;">
-                              <p><a href="#">Oldest to Newest</a></p>
+                              <p>
+                                <select name="order">
+                                    <option value="newest">Newest to Oldest</option>
+                                    <option value="oldest">Oldest to Newest</option>
+                                </select>
+                              </p>
                               <p>
                                 <select name="category">
                                   <option value="all">All Categories</option>
@@ -40,8 +47,21 @@
                                 </select>
                               </p>
                               <p>
-                                <select name="">
-                                  <option value="london">London</option>
+                                <select name="city">
+                                  <option value="all">All Cities</option>
+                                  <?php
+                                    $cities = App\LostItem::select('city')->groupBy('city')->get()->toArray();
+                                    foreach($cities as $city){
+                                        echo "<option value=" . $city['city'] . ">" . $city['city'] . "</option>";
+                                    }
+                                  ?>
+                                </select>
+                              </p>
+                              <p>
+                                <select name="lostorfound">
+                                  <option value="all">Both Lost + Found</option>
+                                  <option value="1">Lost Only</option>
+                                  <option value="0">Found Only</option>
                                 </select>
                               </p>
                           </div>
@@ -54,19 +74,25 @@
                 </div>
             </div>
         </div>
-        <div class="row" style="">
+        <div class="row" style="margin-top: -20px;">
             <div class="col-xl-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <div class="panel-heading-text">Found x items matching your search</div>
+                        <div class="panel-heading-text"><img src="img/magnify.svg" width="35" height="35"/>Found {{count($lostItems)}} items matching your current parameters</div>
                     </div>
                     <div class="panel-body" class="openSans">
                         <div class="panel-body-text">
                             Currently viewing: Newest -> Oldest
+                                
                         </div>
+                        
                     </div>
+                    @foreach ($lostItems as $item)
+                                    <div class="lostItem">Found an item</div>
+                                @endforeach
                 </div>
             </div>
         </div>
     </div>
+
 @stop
