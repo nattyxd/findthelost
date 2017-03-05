@@ -62,6 +62,9 @@ Route::group(['middleware' => 'web'], function () {
             }
             $city = $request->input('city');
         }
+        else{
+            $city = "all";
+        }
         
         // Determine whether to show lost/found items, or both
         if($request->has('lostorfound')){
@@ -91,7 +94,7 @@ Route::group(['middleware' => 'web'], function () {
 
         // Begin selecting DB entries based off of the criteria
 
-        return view('lostitems', ['lostItems' => $lostItems]);
+        return view('lostitems', ['lostItems' => $lostItems, 'request', $request]);
     });
 
     // Login/home routes

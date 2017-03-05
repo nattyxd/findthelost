@@ -1,6 +1,17 @@
-@extends('layouts.app')
+@extends('layouts.template')
+
+@section('title', 'Forgotten my password')
+
+@section('aestheticHeader')
+
+@stop
 
 @section('content')
+      <section id="pageTagline" style="margin-bottom: 50px">
+          <div class="thePageTagLine">
+            Forgotten password
+        </div>
+    </section>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">

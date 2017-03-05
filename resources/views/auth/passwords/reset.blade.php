@@ -1,4 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.template')
+
+@section('title', 'Reset Password')
+
+@section('aestheticHeader')
+
+@stop
 
 @section('content')
 <div class="container">
