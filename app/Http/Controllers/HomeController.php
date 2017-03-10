@@ -67,23 +67,32 @@ class HomeController extends Controller
         // Set flag to correct value
         $boolFlag = ($request->input('lostitem') == "I have lost this item");
 
-        // Upload the image
-        // if($request->input('photo')->isValid()){
-        //     dd("Valid shit");
-        // }
+        // Sanitise the input
+        $category = htmlspecialchars( $request->input('category'), ENT_QUOTES); // sanitize category
+        $title = htmlspecialchars( $request->input('title'), ENT_QUOTES); // sanitize title
+        $description = htmlspecialchars( $request->input('description'), ENT_QUOTES); // sanitize description
+        // boolflag does not need sanitising
+        // reunited does not need sanitising
+        $addressline1 = htmlspecialchars( $request->input('addressline1'), ENT_QUOTES); // sanitize addressline1
+        $addressline2 = htmlspecialchars( $request->input('addressline2'), ENT_QUOTES); // sanitize addressline2
+        $addressline3 = htmlspecialchars( $request->input('addressline3'), ENT_QUOTES); // sanitize addressline3
+        // image_url generated dynamically - does not need sanitising
+        $city = htmlspecialchars( $request->input('city'), ENT_QUOTES); // sanitize city
+        $postcode = htmlspecialchars( $request->input('postcode'), ENT_QUOTES); // sanitize postcode
+        
 
         // Setup Model to insert
-        $lostItem->category = $request->input('category');
-        $lostItem->title = $request->input('title');
-        $lostItem->description = $request->input('description');
+        $lostItem->category = $category;
+        $lostItem->title = $title;
+        $lostItem->description = $description;
         $lostItem->lostitem = $boolFlag; // true for lost item, false for found item
         $lostItem->reunited = false;
-        $lostItem->addressline1 = $request->input('addressline1');
-        $lostItem->addressline2 = $request->input('addressline2');
-        $lostItem->addressline3 = $request->input('addressline3');
+        $lostItem->addressline1 = $addressline1;
+        $lostItem->addressline2 = $addressline2;
+        $lostItem->addressline3 = $addressline3;
         $lostItem->image_url = $parseURL;
-        $lostItem->city = $request->input('city');
-        $lostItem->postcode = $request->input('postcode');
+        $lostItem->city = $city;
+        $lostItem->postcode = $postcode;
 
         $lostItem->save(); // lastly save this model into the db
 

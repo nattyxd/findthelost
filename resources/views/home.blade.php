@@ -5,7 +5,7 @@
 @section('content')
       <section id="pageTagline">
           <div class="thePageTagLine">
-            {{strstr(Auth::user()->name . ' ', ' ', true )}} 's Dashboard
+            {!! strstr(Auth::user()->name . ' ', ' ', true ) !!} 's Dashboard
         </div>
     </section>
     <div class="container-fluid">
