@@ -13,6 +13,7 @@ class AddApprovedToLostitemsTable extends Migration
      */
     public function up()
     {
+        Schema::table('lost_items', function (Blueprint $table) {
             $table->tinyInteger('approved')->nullable(); // 0 OR Null for non approved, 1 for approved items
         });
     }
@@ -24,6 +25,7 @@ class AddApprovedToLostitemsTable extends Migration
      */
     public function down()
     {
+        Schema::table('lost_items', function (Blueprint $table) {
             $table->dropColumn('approved');
         });
     }
