@@ -17,15 +17,7 @@ class AdminController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
-        if(Auth::user()->isAdmin()){
-            // is admin
-            dd("is admin");
-        }
-        else{
-            // not admin
-            dd("not an admin");
-        }
+        $this->middleware('admin');
     }
 
     /**
@@ -39,6 +31,6 @@ class AdminController extends Controller
     }
 
     public function approve(){
-        dd("Approve!");
+        return view('admin/approve');
     }
 }

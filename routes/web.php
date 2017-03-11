@@ -104,6 +104,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/add', 'HomeController@submitadd');
 
     // Admin routes
-    Route::get('/approveitems', 'AdminController@approve');
+    Route::group(['prefix' => 'admin'], function () {
+        Route::get('/approve', 'AdminController@approve');
+    });
 
 });

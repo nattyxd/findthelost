@@ -24,6 +24,20 @@
                             </ul>
                         </div>
                     </div>
+
+                    <div class="panel-heading">
+                        <div class="panel-heading-text"><img src="img/cog.svg" width="35" height="35"/>Administrator Tasks</div>
+                    </div>
+
+                    <div class="panel-body" class="openSans">
+                        <div class="panel-body-text">
+                            <ul style="font-size: 22px;">
+                                <li><a href={{url('/admin/approve')}}>Approve or reject items</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    
                 </div>
             </div>
         </div>
