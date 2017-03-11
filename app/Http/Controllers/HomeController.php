@@ -92,6 +92,7 @@ class HomeController extends Controller
         $lostItem->addressline3 = $addressline3;
         $lostItem->image_url = $parseURL;
         $lostItem->city = $city;
+        $lostItem->approved = null;
         $lostItem->postcode = $postcode;
 
         $lostItem->save(); // lastly save this model into the db

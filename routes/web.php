@@ -90,6 +90,7 @@ Route::group(['middleware' => 'web'], function () {
         })
 
         ->orderBy('created_at', $order)
+        ->where('approved', '=', '1')
         ->get();
 
         // Begin selecting DB entries based off of the criteria
