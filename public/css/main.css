@@ -128,7 +128,7 @@ nav ul li a:hover {
      color: #333;
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1300px) {
     header{
       display: block;
       height: 178px;
@@ -168,6 +168,8 @@ nav ul li a:hover {
     nav ul li a{
     }
 }
+
+
 
 #logo{
   font-size: 72px;
@@ -393,10 +395,172 @@ input[type=radio]{
   display: inline-block;
 }
 
-@media screen and (max-width: 600px){
-  #pageTagline{
-    font-size: 67px;
-    padding-top: 20px;
-    height: 116px;
+@media only screen and (max-width: 1000px){
+  section#pageTagline{
+    height: 100px;
+  }
+  .thePageTagLine{
+    font-size: 38px;
+    line-height: 114px;
+  }
+
+  #splashBox{
+    width: 92%;
+  }
+
+  nav ul li{
+    font-size: 18px;
+  }
+  nav ul li img{
+    width: 20px;
+    height: 20px;
+    display: none;
+    visibility: hidden;
+  }
+
+  footer p{
+    font-size: 12px;
+    line-height: 25px;
+  }
+}
+
+@media only screen and (max-width: 750px){
+  footer p{
+    font-size: 7px;
+  }
+}
+
+@media only screen and (max-width: 480px){
+  header{
+    height: 148px;
+  }
+
+  #logo{
+    padding: 10px 0;
+    margin: 0;
+    font-size: 42px;
+    text-align: center;
+  }
+
+  #splashBoxContainer{
+    width: 100%;
+    height: auto;
+  }
+
+  .thePageTagLine{
+    margin-top:1px;
+    font-size: 22px;
+  }
+
+  #splashBox{
+    margin: 0;
+    width: 100%;
+    height: inherit;
+    min-width: 0px;
+    background-color:rgba(255, 255, 255, 0.85);
+  }
+
+  #splashBoxHeadText h1{
+    font-size: 32px;
+  }
+
+  #splashBoxMainText p{
+    font-size: 18px;
+  }
+
+  .minus2px{
+    margin-left: 0;
+  }
+
+  nav ul li{
+    font-size: 12px;
+  }
+
+  #coreContent{
+    margin-top: 20px;
+  }
+
+  #coreContent h1{
+    font-size: 100%;
+  }
+
+  #coreContent h2{
+    font-size: 70%;
+  }
+
+  #coreContent p{
+    font-size: 60% !important;
+  }
+
+  #coreContent ol{
+    font-size: 60% !important;
+  }
+
+  footer p{
+    font-size: 5px;
+    letter-spacing: 0px;
+  }
+
+  .panel-default>.panel-heading{
+    height: 52px;
+  }
+
+  .panel-heading-text{
+    font-size: 20px;
+    height: 30px;
+  }
+
+  .panel-heading-text img{
+    width: 25px;
+    height: 25px;
+  }
+  
+  .panel-default>.panel-body>.panel-body-text{
+    margin: 0;
+  }
+
+  .panel-body-text ul li{
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 300px){
+  header{
+    height: 268px;
+  }
+
+  header nav ul li{
+    width: 100%;
+  }
+
+  nav ul li:first-child{
+    margin: 0;
+  }
+
+  nav ul li:nth-child(2){
+    background-color: #001e30;
+  }
+
+  nav ul li:nth-child(3){
+    background-color: #00131f;
+  }
+
+  .thePageTagLine{
+    margin-top: 0;
+  }
+
+  .panel-default>.panel-heading{
+    height: 42px;
+  }
+
+  .panel-heading-text{
+    font-size: 14px;
+    margin-top: -5px;
+    height: 30px;
+  }
+
+  .panel-heading-text img{
+    width: 20px;
+    height: 20px;
   }
 }
