@@ -19,6 +19,7 @@
                     <div class="panel-body" class="openSans" style="font-size: 24px;">
                         <div class="panel-body-text">
                             <?php
+                            //dd($errors);
                             ?>
                             @if (count($errors) > 0)
                                 <div class="alert alert-danger">

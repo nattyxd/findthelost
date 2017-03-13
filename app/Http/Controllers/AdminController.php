@@ -31,6 +31,7 @@ class AdminController extends Controller
     }
 
     public function approve(){
-        return view('admin/approve');
+        $unapprovedItems = LostItem::where('approved', '!=', '1')->get();
+        return view('admin/approve', ['unapprovedItems' => $unapprovedItems]);
     }
 }

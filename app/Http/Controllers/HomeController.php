@@ -53,7 +53,6 @@ class HomeController extends Controller
             'photo' => 'required|mimes:jpeg,bmp,png|max:1024', // max 1mb, must be jpg, bmp, or png
         ]);
 
-
         // Validation passed
         $lostItem = new LostItem;
         $path = $request->file('photo')->store('public/lost_item_photos');
@@ -94,9 +93,10 @@ class HomeController extends Controller
         $lostItem->city = $city;
         $lostItem->approved = null;
         $lostItem->postcode = $postcode;
+        $lostItem->approved = 0;
 
         $lostItem->save(); // lastly save this model into the db
 
-        return view('home');
+        return view('home'); // TODO: Return success message
     }
 }
