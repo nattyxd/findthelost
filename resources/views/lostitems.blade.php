@@ -151,7 +151,7 @@
                 <p><span style="font-weight: bold"><?php if($item->lostitem == 1){echo "Lost: ";}else{echo "Found: ";}?></span> {{$item->title}} ({{$item->category}}) <br /><img src="img/location.svg" width="30" height="30" style="margin-top: -7px"/><span style="font-weight: bold">&nbsp;{{$item->city}}</span></p>
                 <p style="margin-top: -16px;font-size:22px;"><img src="img/calendar.svg" width="25" height="25" style="float:left; margin-top:5px;margin-right: 10px;margin-left: 2px;"/>{{$item->created_at}}</p>
                 <p style="font-size: 22px;font-weight: lighter;">{{$item->description}}</p>
-                <button type="button" class="btn btn-primary" style="font-size: 22px;">View All Information</button>
+                <a href="lostitems/{{$item->id}}"><button type="button" class="btn btn-primary" style="font-size: 22px;">View All Information</button></a>
             </div>
         </div>
     @endforeach
