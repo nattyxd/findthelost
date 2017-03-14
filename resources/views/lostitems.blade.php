@@ -84,41 +84,41 @@
                         <div class="panel-body-text">
                             <!--<h2 style="margin-top: -2px;">Search parameters: </h2>-->
                             <?php
-                                if(Request::has('order')){
-                                    if(Request::input('order') == "newest"){
-                                        echo "Newest to Oldest, ";
-                                    }
-                                    else{
-                                        echo "Oldest to Newest, ";
-                                    }
-                                }
+                                // if(Request::has('order')){
+                                //     if(Request::input('order') == "newest"){
+                                //         echo "Newest to Oldest, ";
+                                //     }
+                                //     else{
+                                //         echo "Oldest to Newest, ";
+                                //     }
+                                // }
 
-                                if(Request::has('category')){
-                                    if(Request::input('category') == "all"){
-                                        echo "All Categories, ";
-                                    }
-                                    else{
-                                        echo "'" . Request::input('category') . "' category, ";
-                                    }
-                                }
+                                // if(Request::has('category')){
+                                //     if(Request::input('category') == "all"){
+                                //         echo "All Categories, ";
+                                //     }
+                                //     else{
+                                //         echo "'" . Request::input('category') . "' category, ";
+                                //     }
+                                // }
 
-                                if(Request::has('city')){
-                                   if(Request::input('city') == "all"){
-                                        echo "all cities, ";
-                                    }
-                                    else{
-                                        echo "'" . Request::input('city') . "' city, ";
-                                    }
-                                }
+                                // if(Request::has('city')){
+                                //    if(Request::input('city') == "all"){
+                                //         echo "all cities, ";
+                                //     }
+                                //     else{
+                                //         echo "'" . Request::input('city') . "' city, ";
+                                //     }
+                                // }
 
-                                if(Request::has('lostorfound')){
-                                   if(Request::input('lostorfound') == "all"){
-                                        echo "both lost + found items.";
-                                    }
-                                    else{
-                                        echo "'" . Request::input('lostorfound') . "' items.";
-                                    }
-                                }
+                                // if(Request::has('lostorfound')){
+                                //    if(Request::input('lostorfound') == "all"){
+                                //         echo "both lost + found items.";
+                                //     }
+                                //     else{
+                                //         echo "'" . Request::input('lostorfound') . "' items.";
+                                //     }
+                                // }
                             ?> 
                         </div>
                     </div>
