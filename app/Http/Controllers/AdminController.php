@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Auth;
 use App\LostItem;
+use Session;
 
 class AdminController extends Controller
 {
@@ -30,8 +31,36 @@ class AdminController extends Controller
         return view('home');
     }
 
+    // -- Home page of the "approval" page
     public function approve(){
         $unapprovedItems = LostItem::where('approved', '!=', '1')->get();
         return view('admin/approve', ['unapprovedItems' => $unapprovedItems]);
+    }
+
+    // approve an item with a specified id
+    public function approveid($id){
+        $itemToApprove = LostItem::find($id);
+        $itemToApprove->approved = 1;
+        $itemToApprove->save();
+        
+        $unapprovedItems = LostItem::where('approved', '!=', '1')->get();
+        return redirect()->action('AdminController@approve')->with('success','Item with id "' . $id . '" was approved successfully!');
+    }
+    
+    // if a smart user tries to do a post request they may end up here, show them error page
+    // approval is only allowed through authenticated post routes
+    public function incorrectapproveid($id){
+        abort(403);
+    }
+
+    // reject an item with a specified id
+    public function rejectid(){
+
+    }
+
+    // if a smart user tries to do a post request they may end up here, show them error page
+    // rejecting is only allowed through authenticated post routes
+    public function incorrectrejectid($id){
+        abort(403);
     }
 }

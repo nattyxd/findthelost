@@ -33,8 +33,8 @@
                     <div class="panel-body" class="openSans">
                         <div class="panel-body-text">
                             <ul style="font-size: 22px;">
-                                <li><a href={{url('/admin/approve')}}>Approve or reject items</a></li>
-                                <li><a href={{url('/admin/approve')}}>View/Edit/Message a user of the system</a></li>
+                                <li><a href={{url('/admin/invisibleitems')}}>Approve or reject items</a></li>
+                                <li><a href={{url('/admin/invisibleitems')}}>View/Edit/Message a user of the system</a></li>
                                 
                             </ul>
                         </div>

@@ -106,7 +106,11 @@ Route::group(['middleware' => 'web'], function () {
 
     // Admin routes
     Route::group(['prefix' => 'admin'], function () {
-        Route::get('/approve', 'AdminController@approve');
+        Route::get('invisibleitems', 'AdminController@approve');
+        Route::get('invisibleitems/approve/{id}', 'AdminController@incorrectapproveid');
+        Route::post('invisibleitems/approve/{id}', 'AdminController@approveid');
+        Route::get('invisibleitems/reject/{id}', 'AdminController@incorrectrejectid');
+        Route::post('invisibleitems/reject/{id}', 'AdminController@rejectid');
     });
 
 });
