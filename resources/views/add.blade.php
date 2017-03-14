@@ -31,12 +31,12 @@
                                 </div>
                             @endif
                             {!! Form::open(['url' => '/add' , 'files' => true]) !!}
-                            <div class="floatLeft" style="width: 250px; text-align: right;margin-right: 15px;">
+                            <div class="floatLeft" style="text-align: right;margin-right: 15px;">
                                 <p>{{Form::label('category', 'Category: ')}}</p>
                                 <p>{{Form::label('title', 'Brief title: ')}}</p>
-                                <p>{{Form::label('description', 'Detailed Description: ')}}</p>
+                                <p>{{Form::label('description', 'Description: ')}}</p>
                                 <p>{{Form::label('lostitem', 'Is it a lost item?: ')}}</p>
-                                <p style="margin-top: 40px;">Where you found/lost the item...</p>
+                                <p style="margin-top: 74px;">Location</p>
                                 <p>{{Form::label('addressline1', 'Address Line 1: ')}}</p>
                                 <p>{{Form::label('addressline2', 'Address Line 2: ')}}</p>
                                 <p>{{Form::label('addressline3', 'Address Line 3: ')}}</p>
@@ -44,12 +44,13 @@
                                 <p>{{Form::label('postcode', 'Postcode: ')}}</p>
                                 <p>{{Form::label('photo', 'Image Upload: ')}}</p>
                             </div>
-                            <div class="floatLeft" style="width: 200px">
+                            <div class="floatLeft">
                                 <p>{{Form::select('category', ['pets' => 'Pets', 'electronics' => 'Electronics', 'jewellery' => 'Jewellery'], 'pets')}}</p>
                                 <p>{{Form::text('title')}}</p>
                                 <p>{{Form::text('description')}}</p>
-                                <p style="font-size: 16px; float:left;line-height: -200px;">{{Form::radio('lostitem', 'I have lost this item', true)}}{{Form::label('lostitem', 'I have lost this item ')}}{{Form::radio('lostitem', 'I have found this item')}}<span style="margin-left: 50px; margin-top: -18px;float:left; width:150px;">{{Form::label('lostitem', 'I have found this item ')}}</span></p>
-                                <div style="padding-top: 174px;"></div>
+                                <p class="radio"><label>{{Form::radio('lostitem', 'I have lost this item', true)}}I have lost this item</label></p>
+                                <p class="radio"><span class="secondRadio"><label>{{Form::radio('lostitem', 'I have found this item')}}I have found this item</label></span></p>
+                                <div class="formSectionSeperator"></div>
                                 <p>{{Form::text('addressline1')}}</p>
                                 <p>{{Form::text('addressline2')}}</p>
                                 <p>{{Form::text('addressline3')}}</p>
