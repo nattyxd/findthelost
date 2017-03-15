@@ -42,6 +42,8 @@ class AdminController extends Controller
         $itemToApprove = LostItem::find($id);
         $itemToApprove->approved = 1;
         $itemToApprove->save();
+
+        // TODO: Email user telling them that it's been approved
         
         $unapprovedItems = LostItem::where('approved', '!=', '1')->get();
         return redirect()->action('AdminController@approve')->with('success','Item with id "' . $id . '" was approved successfully!');
@@ -54,8 +56,12 @@ class AdminController extends Controller
     }
 
     // reject an item with a specified id
-    public function rejectid(){
+    public function rejectid($id){
+        LostItem::destroy($id);
 
+        // TODO: Email user telling them that their post was deleted
+
+        return redirect()->action('AdminController@approve')->with('success', 'Item with id"' . $id . '" was deleted successfully!');
     }
 
     // if a smart user tries to do a post request they may end up here, show them error page
