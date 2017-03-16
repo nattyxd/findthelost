@@ -8,6 +8,9 @@
             {!! strstr(Auth::user()->name . ' ', ' ', true ) !!} 's Dashboard
         </div>
     </section>
+    <div class="alert alert-warning" style="font-size: 32px;margin-bottom:0px;text-align:center;">
+                        <strong>Stay safe!</strong> For your safety, please only meet up with filo members in busy public locations.
+    </div>
     <div class="container-fluid">
         <div class="row" style="">
             <div class="col-xl-12">
@@ -15,7 +18,6 @@
                     <div class="panel-heading">
                         <div class="panel-heading-text"><img src="img/cog.svg" width="35" height="35"/>Quick Actions</div>
                     </div>
-
                     <div class="panel-body" class="openSans">
                         <div class="panel-body-text">
                             <ul style="font-size: 22px;">
