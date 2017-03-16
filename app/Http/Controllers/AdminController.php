@@ -43,6 +43,11 @@ class AdminController extends Controller
         $itemToApprove->approved = 1;
         $itemToApprove->save();
 
+        $associatedUser = $itemToApprove->user;
+        //dd($associatedUser);
+        $associatedUser->trust = $associatedUser->trust + 100;
+        $associatedUser->save();
+
         // TODO: Email user telling them that it's been approved
         
         $unapprovedItems = LostItem::where('approved', '!=', '1')->get();
@@ -68,5 +73,10 @@ class AdminController extends Controller
     // rejecting is only allowed through authenticated post routes
     public function incorrectrejectid($id){
         abort(403);
+    }
+
+    // Show the page where admins can edit items
+    public function editwithid($id){
+        dd("403"); // TODO: Implement
     }
 }

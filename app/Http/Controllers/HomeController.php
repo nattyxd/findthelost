@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use App\LostItem;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -94,9 +95,19 @@ class HomeController extends Controller
         $lostItem->approved = null;
         $lostItem->postcode = $postcode;
         $lostItem->approved = 0;
+        $lostItem->user()->associate(Auth::user()->id);
 
+        dd($lostItem->user->trust);
+        if($lostItem->user->trust >= 200){
+            // the user is trusted and an admin does not need to authorise them adding items
+            $lostItem->approved = 1;
+        }
+        else{
+            // user isn't trusted yet
+            $lostItem->approved = 0;
+        }
         $lostItem->save(); // lastly save this model into the db
 
-        return view('home'); // TODO: Return success message
+        return redirect()->action('HomeController@index'); // TODO: Return success message
     }
 }

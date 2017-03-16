@@ -1,0 +1,19 @@
+<svg width="128" height="128" xmlns="http://www.w3.org/2000/svg">
+
+ <g class="currentLayer">
+  <title>Layer 1</title>
+  <g stroke="#ffffff" class="selected" id="svg_1">
+   <circle id="svg_2" stroke-width="4" stroke-miterlimit="10" stroke="#ffffff" r="55" fill="none" cy="62.889" cx="64.573997"/>
+   <circle id="svg_3" stroke-width="4" stroke-miterlimit="10" stroke="#ffffff" r="11" fill="none" cy="31.783001" cx="63.997002"/>
+  </g>
+  <path id="svg_4" stroke-width="4" stroke-miterlimit="10" stroke="#ffffff" fill="none" d="m71.443,90.865l0,-20.373l0,-8.484l0,-12.126c-0.563,-0.101 -1.146,-0.172 -1.756,-0.172l-11.3,0c-3.85,0 -6.972,2.138 -6.972,4.773c0,2.232 2.248,4.091 5.269,4.613c0.193,1.042 0.322,2.114 0.322,3.231l0,28.645c0,5.271 -2.258,9.87 -5.629,12.42c0.376,1.221 1.459,2.123 2.788,2.123l19.642,0c1.441,0 2.589,-1.07 2.853,-2.453c-3.143,-2.627 -5.217,-7.107 -5.217,-12.197z"/>
+ </g>
+ <g>
+  <title>Layer 2</title>
+  <rect fill="none" y="0" x="0" height="100%" width="100%" id="backgroundrect"/>
+ </g>
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+ </g>
+</svg>

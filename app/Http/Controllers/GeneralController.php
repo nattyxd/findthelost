@@ -102,5 +102,29 @@ class GeneralController extends Controller
 
         return view('lostitems', ['lostItems' => $lostItems, 'request', $request]);
     }
+
+    public function viewid($id){
+        $itemToView = LostItem::find($id);
+        if(!is_null($itemToView) && $itemToView->approved === 1)
+        {
+            return view('viewitem', ['itemToView' => $itemToView]);
+        }
+        else
+        {
+            if(is_null($itemToView)){
+                // non malicious requests to items that don't exist should result in being returned back
+                abort(403); // return 403 - shouldn't return 404 as we don't want to reveal the IDs of existing items
+            }
+            else{
+                if(1 == 1){
+                    // TODO: Check if user has special permission to view item, e.g. they own it, or have requested it
+                    dd("You have special permission to view the item");
+                }
+                else{
+                    abort(403); // Malicious request: item is not approved, or has been resolved (and is therefore private!)
+                }
+            }
+        }
+    }
 }
 ?>

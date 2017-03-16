@@ -22,6 +22,7 @@ Route::group(['middleware' => 'web'], function () {
     });
 
     Route::get('/lostitems', 'GeneralController@lostitems');
+    Route::get('/view/{id}', 'GeneralController@viewid');
 
     // Login/home routes
     Auth::routes();
@@ -36,6 +37,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('invisibleitems/approve/{id}', 'AdminController@approveid');
         Route::get('invisibleitems/reject/{id}', 'AdminController@incorrectrejectid');
         Route::post('invisibleitems/reject/{id}', 'AdminController@rejectid');
+        Route::get('edit/{id}', 'AdminController@editwithid');
     });
 
 });
