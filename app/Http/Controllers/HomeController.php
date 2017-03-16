@@ -106,6 +106,6 @@ class HomeController extends Controller
             $lostItem->approved = 0;
         }
         $lostItem->save(); // lastly save this model into the db
-        return redirect()->action('GeneralController@viewid', array($lostItem->id)); // TODO: Return success message
+        return redirect()->action('GeneralController@viewid', array($lostItem->id));
     }
 }

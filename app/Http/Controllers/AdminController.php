@@ -62,12 +62,14 @@ class AdminController extends Controller
 
     // reject an item with a specified id
     public function rejectid($id){
-        LostItem::destroy($id);
+        $itemToDestroy = LostItem::find($id);
 
         // reduce the user's trust
-        $associatedUser = $itemToApprove->user;
+        $associatedUser = $itemToDestroy->user;
         $associatedUser->trust = $associatedUser->trust - 100;
-        $associatedUser-> save;
+        $associatedUser->save();
+
+        LostItem::destroy($id); // delete the item
 
         // TODO: Email user telling them that their post was deleted
 
