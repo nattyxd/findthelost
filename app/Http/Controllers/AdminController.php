@@ -43,8 +43,8 @@ class AdminController extends Controller
         $itemToApprove->approved = 1;
         $itemToApprove->save();
 
+        // make the user more trusted, so they don't need admin approval in future
         $associatedUser = $itemToApprove->user;
-        //dd($associatedUser);
         $associatedUser->trust = $associatedUser->trust + 100;
         $associatedUser->save();
 
@@ -63,6 +63,11 @@ class AdminController extends Controller
     // reject an item with a specified id
     public function rejectid($id){
         LostItem::destroy($id);
+
+        // reduce the user's trust
+        $associatedUser = $itemToApprove->user;
+        $associatedUser->trust = $associatedUser->trust - 100;
+        $associatedUser-> save;
 
         // TODO: Email user telling them that their post was deleted
 

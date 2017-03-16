@@ -9,7 +9,7 @@
         </div>
     </section>
     <div class="alert alert-warning" style="font-size: 32px;margin-bottom:0px;text-align:center;">
-                        <strong>Stay safe!</strong> For your safety, please only meet up with filo members in busy public locations.
+        <strong>Stay safe!</strong> For your safety, please only meet up with filo members in busy public locations.
     </div>
     <div class="container-fluid">
         <div class="row" style="">
