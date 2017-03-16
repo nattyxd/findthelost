@@ -97,7 +97,6 @@ class HomeController extends Controller
         $lostItem->approved = 0;
         $lostItem->user()->associate(Auth::user()->id);
 
-        dd($lostItem->user->trust);
         if($lostItem->user->trust >= 200){
             // the user is trusted and an admin does not need to authorise them adding items
             $lostItem->approved = 1;
@@ -107,7 +106,6 @@ class HomeController extends Controller
             $lostItem->approved = 0;
         }
         $lostItem->save(); // lastly save this model into the db
-
-        return redirect()->action('HomeController@index'); // TODO: Return success message
+        return redirect()->action('GeneralController@viewid', array($lostItem->id)); // TODO: Return success message
     }
 }
