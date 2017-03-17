@@ -52,7 +52,7 @@
                                   <?php
                                     $cities = App\LostItem::select('city')->groupBy('city')->get()->toArray();
                                     foreach($cities as $city){
-                                        echo "<option value=" . $city['city'] . ">" . $city['city'] . "</option>";
+                                        echo "<option value='" . $city['city'] . "'>" . $city['city'] . "</option>";
                                     }
                                   ?>
                                 </select>
