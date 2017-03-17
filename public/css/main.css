@@ -333,6 +333,10 @@ input[type=radio]{
   background-color: #3b1600;
 }
 
+.request{
+  background-color: #531515;
+}
+
 .lostItemImg{
   width: 300px;
   height: 170px;
@@ -375,6 +379,10 @@ input[type=file]{
 
 .formSectionSeperator{
   margin-top: 124px;
+}
+
+.responsiveCoreContent{
+  font-size: 22px !important;
 }
 
 @media only screen and (max-width: 1300px) {
@@ -501,6 +509,10 @@ input[type=file]{
 
   .formSectionSeperator{
     margin-top: 68px;
+  }
+
+  .responsiveCoreContent{
+    font-size: 18px !important;
   }
 }
 
@@ -644,6 +656,10 @@ input[type=file]{
   .lostItemContent{
     width: 100%;
     padding-right: 12px;
+  }
+  
+  .responsiveCoreContent{
+    font-size: 14px !important;
   }
 }
 

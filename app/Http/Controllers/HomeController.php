@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use App\LostItem;
+use App\ItemRequest;
 use Auth;
 
 class HomeController extends Controller
@@ -182,7 +183,72 @@ class HomeController extends Controller
 
         $lostItem->save(); // lastly save this model into the db
         return redirect()->action('GeneralController@viewid', array($lostItem->id));
+    }
 
+    public function submititemrequest($id, Request $request){
+        // Ensure the user has permission to submit a request for the item before doing anything else
+        $itemInQuestion = LostItem::find($id);
+        if(!is_null($itemInQuestion)){ // Need to ensure the item actually exists
+            if($itemInQuestion->approved == 1 && $itemInQuestion->user_id !== Auth::user()->id){ // ensure item is approved & owner not submitting request
+                // Do a quick check to make sure that the user doesn't already have a request
+                $userRequestsForItem = ItemRequest::where('user_id', '=', Auth::user()->id)->where('lost_item_id', '=', $itemInQuestion->id);
+                if($userRequestsForItem->count() > 0){
+                    abort(403); // users can only have 1 request per item
+                }
+
+                // item is public, and submitter is not the owner, and no request exists: continue with submission procedure
+                $itemRequest = new ItemRequest;
+
+                // Ensure valid input has been provided
+                $this->validate($request, [
+                    'reason' => 'required|min:5|max:255',
+                    'photo' => 'mimes:jpeg,bmp,png|max:1024', // max 1mb, must be jpg, bmp, or png
+                ]);
+
+                // Validation passed
+                if($request->file('photo')){
+                    // only want to store a new photo if one has actually been set
+                    $path = $request->file('photo')->store('public/lost_item_photos');
+
+                    $parseURL = explode("/", $path);
+                    unset($parseURL[0]);
+                    $parseURL = implode("/", $parseURL);
+                    $parseURL = "storage/" . $parseURL;
+                    $itemRequest->image_url = $parseURL;
+                }
+
+                // Sanitise the input
+                $reason = htmlspecialchars( $request->input('reason'), ENT_QUOTES); // sanitize reason
+
+                // Start saving the model
+                $itemRequest->user_id = Auth::user()->id;
+                $itemRequest->lost_item_id = $itemInQuestion->id;
+                $itemRequest->approved = 0;
+                $itemRequest->adminhandled = 0;
+                $itemRequest->reason = $reason;
+
+                $itemRequest->save();
+                return redirect()->action('GeneralController@viewid', array($itemInQuestion->id));
+            }
+            else{
+                abort(403); // no permission to submit a request
+            }
+            dd($itemInQuestion);
+        }
+
+        // Ensure valid input has been provided
+        $this->validate($request, [
+            'category' => 'required', Rule::in(['pets', 'electronics', 'jewellery']),
+            'title' => 'required|min:5|max:255',
+            'description' => 'required|min:5|max:255',
+            'lostitem' => 'required', Rule::in(['I have lost this item'], 'I have found this item'),
+            'addressline1' => 'required|min:5|max:255',
+            'addressline2' => 'max:255', // don't need to require line 2
+            'addressline3' => 'max:255', // don't need an addressline3 necessarily
+            'city' => 'required|max:255', // city must be given for sorting
+            'postcode' => 'required|max:255|regex:/[A-Z]{1,2}[0-9][0-9A-Z]?\s?[0-9][A-Z]{2}/i', // use regex to validate postcode
+            'photo' => 'required|mimes:jpeg,bmp,png|max:1024', // max 1mb, must be jpg, bmp, or png
+        ]);
     }
 
     // return true if the user submitted an item, or is admin, false otherwise

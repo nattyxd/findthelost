@@ -24,13 +24,15 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/lostitems', 'GeneralController@lostitems');
     Route::get('/view/{id}', 'GeneralController@viewid');
 
-    // Login/home routes
-    Auth::routes();
+    Auth::routes(); // Laravel authentication routes
+
+    // Authenticated users only routes
     Route::get('/home', 'HomeController@index');
     Route::get('/add', 'HomeController@add');
     Route::post('/add', 'HomeController@submitadd');
     Route::get('/edit/{id}', 'HomeController@edit');
     Route::post('/edit/{id}', 'HomeController@submitedit');
+    Route::post('/request/{id}', 'HomeController@submititemrequest');
 
     // Admin routes
     Route::group(['prefix' => 'admin'], function () {
@@ -40,5 +42,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('invisibleitems/reject/{id}', 'AdminController@incorrectrejectid');
         Route::post('invisibleitems/reject/{id}', 'AdminController@rejectid');
         Route::get('edit/{id}', 'AdminController@editwithid');
+        Route::post('/itemrequests/approve/{id}', 'AdminController@approverequestid');
+        Route::post('/itemrequests/reject/{id}', 'AdminController@rejectitemid');
     });
 });

@@ -113,34 +113,38 @@ class GeneralController extends Controller
      *  @return View, array($request) returns the view item /403 page, with an array of requests as an optional parameter
      */
     public function viewid($id){
-        $itemToView = LostItem::find($id); // Select the item's model
-        $userRequestsForItem = ItemRequest::where('user_id', '=', Auth::user()->id)->where('lost_item_id', '=', $itemToView->id);
-
+        $itemToView          = LostItem::find($id); // Select the item's model
         if(is_null($itemToView)){
             // Return 403 to prevent item ID bruteforces/prevent null pointers
             abort(403);
         }
+        $allRequestsForItem  = ItemRequest::where('lost_item_id', '=', $itemToView->id);
+        if(Auth::user()){
+            $userRequestsForItem = ItemRequest::where('user_id', '=', Auth::user()->id)->where('lost_item_id', '=', $itemToView->id);
+        }
+
 
         // Item exists - run checks to see which requests should be returned
         if(!is_null(Auth::user())){
             // Certain users may have special permissions to view the page, regardless of publicity
+
             if(Auth::user()->userlevel == 1){
                 // admins get special permission, return with all requests for the item shown
-                dd("You have admin rights");
+                return view('viewitem', ['itemToView' => $itemToView, 'requests' => $allRequestsForItem->get(), 'privileges' => 'administrator']);
             }
             elseif($itemToView->user_id == Auth::user()->id){
                 // the user attempting to view is the owner, they can view requests but NOT accept/reject them
-                dd("You are the owner of this item");
+                return view('viewitem', ['itemToView' => $itemToView, 'requests' => $allRequestsForItem->get(), 'privileges' => 'all_readonly']);
             }
             elseif($userRequestsForItem->count() > 0){
                 // User has special permission to view because they have made a request for the item
-                dd("You have special permission to view the item because you made a request for this item");
+                return view('viewitem', ['itemToView' => $itemToView, 'requests' => $userRequestsForItem->get(), 'privileges' => 'requestee_readonly']);
             }
         }
 
         // No special conditions met - public items can still be viewed in readonly
         if($itemToView->approved === 1){
-            return view('viewitem', ['itemToView' => $itemToView, 'request' => null]);
+            return view('viewitem', ['itemToView' => $itemToView, 'requests' => null, 'privileges' => 'none']);
         }  
         abort(403); // unauthorised request
     }

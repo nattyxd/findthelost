@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Auth;
 use App\LostItem;
+use App\ItemRequest;
 use Session;
 
 class AdminController extends Controller
@@ -37,9 +38,16 @@ class AdminController extends Controller
         return view('admin/approve', ['unapprovedItems' => $unapprovedItems]);
     }
 
-    // approve an item with a specified id
+    // approve an item with a specified id TO BECOME PUBLIC
+    // this function does NOT approve an ItemRequest, it just
+    // makes an item the user has added into the system public
     public function approveid($id){
         $itemToApprove = LostItem::find($id);
+
+        if(!$itemToApprove){
+            abort(400); // in case they somehow submit an item that doesn't exist
+        }
+
         $itemToApprove->approved = 1;
         $itemToApprove->save();
 
@@ -80,6 +88,37 @@ class AdminController extends Controller
     // rejecting is only allowed through authenticated post routes
     public function incorrectrejectid($id){
         abort(403);
+    }
+
+    public function approverequestid($id){
+        $requestToApprove = ItemRequest::find($id);
+
+        if(!$requestToApprove){
+            abort(400); // in case they somehow submit an request that doesn't exist
+        }
+
+        // Firstly - approve the item in question
+        $requestToApprove->approved = 1;
+        $requestToApprove->adminhandled = 1;
+        $requestToApprove->save();
+
+        // Secondly - inform the user via email that their request was accepted
+        // TODO - Email
+
+        // Secondly - inform the other users that their request was rejected
+        $requestsToReject = ItemRequest::where('lost_item_id', $requestToApprove->lost_item_id)->where('id', '!=', $id)->get();
+        foreach ($requestsToReject as $requestToReject){
+            $requestToReject->approved = 0;
+            $requestToReject->adminhandled = 1;
+            $requestToReject->save();
+            // TODO: Email the users who had the requests rejected
+        }
+        return redirect()->action('GeneralController@viewid', ['id' => $requestToApprove->lost_item_id])->withSuccess('Successfully approved the selected item request!');
+    }
+
+    public function rejectitemid($id){
+
+        // TODO: Email the user that had the request rejected
     }
 
     // Show the page where admins can edit items
