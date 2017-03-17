@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Auth;
 use App\LostItem;
+use App\ItemRequest;
 use Session;
 
 class GeneralController extends Controller
@@ -103,28 +104,49 @@ class GeneralController extends Controller
         return view('lostitems', ['lostItems' => $lostItems, 'request', $request]);
     }
 
+    /*
+     *  viewid - Decides whether or not a user has the rights to view details regarding a lost item, and if they do
+     *           have rights, it will determine which requests should be made visible to the user, and return a view
+     *           with the appropriate requests
+     *
+     *  @param  integer $id The ID of the item that the user desires to view
+     *  @return View, array($request) returns the view item /403 page, with an array of requests as an optional parameter
+     */
     public function viewid($id){
-        $itemToView = LostItem::find($id);
-        if(!is_null($itemToView) && $itemToView->approved === 1)
-        {
-            return view('viewitem', ['itemToView' => $itemToView]);
+        $itemToView = LostItem::find($id); // Select the item's model
+        $userRequestsForItem = ItemRequest::where('user_id', '=', Auth::user()->id)->where('lost_item_id', '=', $itemToView->id);
+
+        if(is_null($itemToView)){
+            // Requests to items that don't exist should result in 403 to hide item ID info
+            abort(403);
         }
-        else
-        {
-            if(is_null($itemToView)){
-                // non malicious requests to items that don't exist should result in being returned back
-                abort(403); // return 403 - shouldn't return 404 as we don't want to reveal the IDs of existing items
+        else{
+            // Item exists - run checks to see which requests should be returned
+            if(!is_null(Auth::user())){
+                // Certain users may have special permissions to view the page, regardless of publicity
+                if(Auth::user()->userlevel == 1){
+                    // admins get special permission, return with all requests for the item shown
+                    dd("You have admin rights");
+                }
+                elseif($itemToView->user_id == Auth::user()->id){
+                    // the user attempting to view is the owner, they can view requests but NOT accept/reject them
+                    dd("You are the owner of this item");
+                }
+                elseif($userRequestsForItem->count() > 0){
+                    // User has special permission to view because they have made a request for the item
+                    dd("You have special permission to view the item because you made a request for this item");
+                }
+            }
+            // No special conditions met yet
+            if($itemToView->approved === 1){
+                // They have the right to view the item, but not see any requests for it
+                return view('viewitem', ['itemToView' => $itemToView, 'request' => null]);
             }
             else{
-                if(1 == 1){
-                    // TODO: Check if user has special permission to view item, e.g. they own it, or have requested it
-                    dd("You have special permission to view the item");
-                }
-                else{
-                    abort(403); // Malicious request: item is not approved, or has been resolved (and is therefore private!)
-                }
+                // unauthorised request
+                abort(403);
             }
-        }
+        }  
     }
 }
 ?>

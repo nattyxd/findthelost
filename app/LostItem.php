@@ -13,4 +13,8 @@ class LostItem extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function requests(){
+        return $this->hasMany('App\ItemRequest');
+    }
 }

@@ -38,6 +38,27 @@
                             </div>
                         </div>
                     </div>
+                    <div class="panel-heading">
+                        <div class="panel-heading-text"><img src="../img/info.svg" width="35" height="35"/>Item Request</div>
+                    </div>
+                    <div class="panel-body openSans" style="font-size: 22px;">
+                        <div class="panel-body-text">
+                            @if(!Auth::user())
+                                <div class="alert alert-warning">
+                                    <strong>Not Logged In!</strong> You need to be logged in to view information regarding requests.
+                                </div>
+                            @else
+                                {{-- user is logged in --}}
+                                @if ($itemToView->request === null)
+                                    @if($itemToView->lostitem === 1)
+                                        Have you found this item? Let us know!
+                                    @else
+                                        Is this your item that you lost? Make a request!
+                                    @endif
+                                @endif
+                            @endif
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
