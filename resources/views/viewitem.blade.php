@@ -89,9 +89,13 @@
                                 @else
                                     {{-- The requests were not null, so we need to echo each request we have --}}
                                     @if ($privileges == "administrator")
-                                        <div class="alert alert-warning">
+                                        <div class="alert alert-info">
                                             <strong>Information: </strong> Administrators cannot submit item requests.
                                         </div>
+                                        <div class="alert alert-warning">
+                                            <strong>Warning: </strong> For your convenience, you can accept/reject item requests after accepting a request (in case you make a mistake), but be warned: all actions that modify a user's request will result in <b>an email notification being sent to the user</b>. Think carefully before acting!
+                                        </div>
+                                        
                                     @endif
                                     @if (count($requests) == 0)
                                         <div class="alert alert-info">
