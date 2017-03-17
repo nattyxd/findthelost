@@ -29,6 +29,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/home', 'HomeController@index');
     Route::get('/add', 'HomeController@add');
     Route::post('/add', 'HomeController@submitadd');
+    Route::get('/edit/{id}', 'HomeController@edit');
+    Route::post('/edit/{id}', 'HomeController@submitedit');
 
     // Admin routes
     Route::group(['prefix' => 'admin'], function () {
@@ -39,5 +41,4 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('invisibleitems/reject/{id}', 'AdminController@rejectid');
         Route::get('edit/{id}', 'AdminController@editwithid');
     });
-
 });

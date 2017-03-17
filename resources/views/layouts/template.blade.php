@@ -34,7 +34,7 @@
                 echo '<li><a href="' . route('register') . '">Register</a></li>';
               }
               else{
-                echo "<li><a href='" . url("/home") . "'><img src='". asset('img/generic_user.svg') . "' width='40' height='40' /> &nbsp; My account</li>";
+                echo "<li><a href='" . url("/home") . "'><img src='". asset('img/generic_user.svg') . "' width='40' height='40' /> &nbsp; My Dashboard</li>";
                 echo '<li><a href="' . route('logout') . '">Logout</a></li>';
               }
             ?>

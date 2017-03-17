@@ -108,4 +108,99 @@ class HomeController extends Controller
         $lostItem->save(); // lastly save this model into the db
         return redirect()->action('GeneralController@viewid', array($lostItem->id));
     }
+
+    public function edit($id){
+        $out = $this->isSubmitterOrAdmin($id);
+        if($out['authenticated']){
+            return view('edit', ['itemToEdit' => $out['item']]);
+        }
+        abort(403); // malicious requests get shown the permission denied error
+    }
+
+    public function submitedit($id, Request $request){
+        // Laravel should automatically filter out malicious requests - but we are paranoid and will check they are authenticated anyway
+        $out = $this->isSubmitterOrAdmin($id);
+        if(!$out['authenticated']){
+            abort(403); // malicious requests get shown the permission denied error
+        }
+
+        // Now we know the user is legit, we can begin modifying their item
+        // Ensure valid input has been provided
+        $this->validate($request, [
+            'category' => 'required', Rule::in(['pets', 'electronics', 'jewellery']),
+            'title' => 'required|min:5|max:255',
+            'description' => 'required|min:5|max:255',
+            'lostitem' => 'required', Rule::in(['I have lost this item'], 'I have found this item'),
+            'addressline1' => 'required|min:5|max:255',
+            'addressline2' => 'max:255', // don't need to require line 2
+            'addressline3' => 'max:255', // don't need an addressline3 necessarily
+            'city' => 'required|max:255', // city must be given for sorting
+            'postcode' => 'required|max:255|regex:/[A-Z]{1,2}[0-9][0-9A-Z]?\s?[0-9][A-Z]{2}/i', // use regex to validate postcode
+            'photo' => 'mimes:jpeg,bmp,png|max:1024', // max 1mb, must be jpg, bmp, or png
+        ]);
+
+        // Validation passed
+        $lostItem = LostItem::find($id);
+        if($request->file('photo')){
+            // only want to store a new photo if one has actually been set
+            $path = $request->file('photo')->store('public/lost_item_photos');
+
+            $parseURL = explode("/", $path);
+            unset($parseURL[0]);
+            $parseURL = implode("/", $parseURL);
+            $parseURL = "storage/" . $parseURL;
+            $lostItem->image_url = $parseURL;
+        }
+
+        // Set flag to correct value
+        $boolFlag = ($request->input('lostitem') == "I have lost this item");
+
+        // Sanitise the input
+        $category = htmlspecialchars( $request->input('category'), ENT_QUOTES); // sanitize category
+        $title = htmlspecialchars( $request->input('title'), ENT_QUOTES); // sanitize title
+        $description = htmlspecialchars( $request->input('description'), ENT_QUOTES); // sanitize description
+        // boolflag does not need sanitising
+        // reunited does not need sanitising
+        $addressline1 = htmlspecialchars( $request->input('addressline1'), ENT_QUOTES); // sanitize addressline1
+        $addressline2 = htmlspecialchars( $request->input('addressline2'), ENT_QUOTES); // sanitize addressline2
+        $addressline3 = htmlspecialchars( $request->input('addressline3'), ENT_QUOTES); // sanitize addressline3
+        // image_url generated dynamically - does not need sanitising
+        $city = htmlspecialchars( $request->input('city'), ENT_QUOTES); // sanitize city
+        $postcode = htmlspecialchars( $request->input('postcode'), ENT_QUOTES); // sanitize postcode
+
+        // Setup Model to insert
+        $lostItem->category = $category;
+        $lostItem->title = $title;
+        $lostItem->description = $description;
+        $lostItem->lostitem = $boolFlag; // true for lost item, false for found item
+        $lostItem->reunited = false;
+        $lostItem->addressline1 = $addressline1;
+        $lostItem->addressline2 = $addressline2;
+        $lostItem->addressline3 = $addressline3;
+        $lostItem->city = $city;
+        $lostItem->postcode = $postcode;
+
+        $lostItem->save(); // lastly save this model into the db
+        return redirect()->action('GeneralController@viewid', array($lostItem->id));
+
+    }
+
+    // return true if the user submitted an item, or is admin, false otherwise
+    public function isSubmitterOrAdmin($id){
+        $itemInQuestion = LostItem::find($id);
+        if(is_null($itemInQuestion)){
+            // if the item doesn't exist, the request should immediately be rejected in order to avoid nullrefence exceptions
+            $out['authenticated'] = false;
+            return $out;
+        }
+        if(!is_null(Auth::user())){
+            if(Auth::user()->userlevel == 1 || $itemInQuestion->user_id == Auth::user()->id){
+                $out['authenticated'] = true;
+                $out['item'] = $itemInQuestion;
+                return $out;
+            }
+        }
+        $out['authenticated'] = false;
+        return $out;
+    }
 }

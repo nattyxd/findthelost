@@ -11,6 +11,16 @@
     <div class="alert alert-warning" style="font-size: 32px;margin-bottom:0px;text-align:center;">
         <strong>Stay safe!</strong> For your safety, please only meet up with filo members in busy public locations.
     </div>
+    @if ((Auth::user()->trust < 200) && (Auth::user()->userlevel !== 1))
+    <div class="alert alert-info" style="font-size: 32px;margin-bottom:0px;text-align:center;">
+        <strong>Welcome!</strong> Your trust rating is currently <strong>{{Auth::user()->trust}}</strong>. An administrator will approve your items until you have built up trust. Enjoy using filo!
+    </div>
+    @elseif ((Auth::user()->trust >= 200) && (Auth::user()->userlevel !== 1))
+    <div class="alert alert-success" style="font-size: 32px;margin-bottom:0px;text-align:center;">
+        <strong>Wow!</strong> Your trust rating is currently <strong>{{Auth::user()->trust}}</strong>, thanks for being such a valued member of our community!
+    </div>
+    @endif
+    
     <div class="container-fluid">
         <div class="row" style="">
             <div class="col-xl-12">
