@@ -117,36 +117,32 @@ class GeneralController extends Controller
         $userRequestsForItem = ItemRequest::where('user_id', '=', Auth::user()->id)->where('lost_item_id', '=', $itemToView->id);
 
         if(is_null($itemToView)){
-            // Requests to items that don't exist should result in 403 to hide item ID info
+            // Return 403 to prevent item ID bruteforces/prevent null pointers
             abort(403);
         }
-        else{
-            // Item exists - run checks to see which requests should be returned
-            if(!is_null(Auth::user())){
-                // Certain users may have special permissions to view the page, regardless of publicity
-                if(Auth::user()->userlevel == 1){
-                    // admins get special permission, return with all requests for the item shown
-                    dd("You have admin rights");
-                }
-                elseif($itemToView->user_id == Auth::user()->id){
-                    // the user attempting to view is the owner, they can view requests but NOT accept/reject them
-                    dd("You are the owner of this item");
-                }
-                elseif($userRequestsForItem->count() > 0){
-                    // User has special permission to view because they have made a request for the item
-                    dd("You have special permission to view the item because you made a request for this item");
-                }
+
+        // Item exists - run checks to see which requests should be returned
+        if(!is_null(Auth::user())){
+            // Certain users may have special permissions to view the page, regardless of publicity
+            if(Auth::user()->userlevel == 1){
+                // admins get special permission, return with all requests for the item shown
+                dd("You have admin rights");
             }
-            // No special conditions met yet
-            if($itemToView->approved === 1){
-                // They have the right to view the item, but not see any requests for it
-                return view('viewitem', ['itemToView' => $itemToView, 'request' => null]);
+            elseif($itemToView->user_id == Auth::user()->id){
+                // the user attempting to view is the owner, they can view requests but NOT accept/reject them
+                dd("You are the owner of this item");
             }
-            else{
-                // unauthorised request
-                abort(403);
+            elseif($userRequestsForItem->count() > 0){
+                // User has special permission to view because they have made a request for the item
+                dd("You have special permission to view the item because you made a request for this item");
             }
+        }
+
+        // No special conditions met - public items can still be viewed in readonly
+        if($itemToView->approved === 1){
+            return view('viewitem', ['itemToView' => $itemToView, 'request' => null]);
         }  
+        abort(403); // unauthorised request
     }
 }
 ?>
