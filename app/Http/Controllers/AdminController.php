@@ -192,6 +192,10 @@ class AdminController extends Controller
     public function deleteuserid($id){
         $user = User::find($id);
         $user->delete();
+
+        ItemRequest::where('user_id', '=', $id)->delete(); // delete the user's item requests
+        LostItem::where('user_id', '=', $id)->delete(); // delete their lost items too
+
         return redirect()->action('AdminController@manageusers');
     }
 }
