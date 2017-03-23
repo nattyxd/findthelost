@@ -385,6 +385,91 @@ input[type=file]{
   font-size: 22px !important;
 }
 
+.homeItem{
+  width: calc(100% - 1px);
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+.homeItemImg{
+  width: 80px;
+  height: 80px;
+  position: relative;
+  left: 10px;
+  top: 10px;
+  background-size: 65px 65px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.homeItemText{
+  width: calc(100% - 100px);
+  height: 80px;
+  position: relative;
+  left: 90px;
+  top: -70px;
+  line-height: 74px;
+  text-indent: 15px;
+}
+
+/* Style descriptors for dashboard */
+.homeItemPlus{
+  background-color: #6CA239;
+  color: #204100;
+}
+.plusBg{
+  background-image: url('../img/plus.svg');
+}
+
+.homeItemViewAllItems{
+  background-color: #307F7F;
+  color: #E1F5F5;
+}
+.viewAllItemsBg{
+  background-image: url('../img/discover.svg');
+}
+
+.homeItemMyItems{
+  background-color: #267cb5;
+  color: #fff;
+}
+.myItemsBg{
+  background-image: url('../img/list.svg');
+}
+
+.homeItemMyAccount{
+  background-color: #f5eee5;
+  color: #fff;
+}
+.myAccountBg{
+  background-image: url('../img/generic_user.svg');
+}
+
+.homeItemHidden{
+  background-color: #4b96c8;
+  color: #fff;
+}
+.hiddenBg{
+  background-image: url('../img/hidden.svg');
+}
+
+.homeItemAttention{
+  background-color: #730F0F;
+  color: #730F0F;
+}
+.attentionBg{
+  background-image: url('../img/attention.svg');
+}
+
+.homeItemManage{
+  background-color: #027A91;
+  color: #d8f9ff;
+}
+.manageBg{
+  background-image: url('../img/settings.svg');
+}
+/* end style descriptors for dashboard */
+
 @media only screen and (max-width: 1300px) {
     header{
       display: block;

@@ -30,10 +30,39 @@
                     </div>
                     <div class="panel-body" class="openSans">
                         <div class="panel-body-text">
-                            <ul style="font-size: 22px;">
-                                <li><a href={{url('/add')}}>Add a new item to the system</a></li>
-                                <li>View my approved items</li>
-                                <li>Edit my account information</li>
+                            <ul style="font-size: 22px;padding:0;list-style-type:none;">
+                                <li>
+                                    <a href={{url('/add')}}>
+                                        <div class="homeItem homeItemPlus">
+                                            <div class="homeItemImg plusBg" style="background-color: #DAF1C4"></div>
+                                            <div class="homeItemText" style="background-color: #DAF1C4">Add a new item</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href={{url('/lostitems')}}>
+                                        <div class="homeItem homeItemViewAllItems">
+                                            <div class="homeItemImg viewAllItemsBg" style="background-color: #4E9797"></div>
+                                            <div class="homeItemText" style="background-color: #4E9797">View items in the system</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href={{url('/home/myitems')}}>
+                                        <div class="homeItem homeItemMyItems">
+                                            <div class="homeItemImg myItemsBg" style="background-color: #6EACD5"></div>
+                                            <div class="homeItemText" style="background-color: #6EACD5">My items</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href={{url('/home/myaccount')}}>
+                                        <div class="homeItem homeItemMyAccount">
+                                            <div class="homeItemImg myAccountBg" style="background-color: #6b363e"></div>
+                                            <div class="homeItemText" style="background-color: #6b363e">My account</div>
+                                        </div>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -44,10 +73,31 @@
                     </div>
                     <div class="panel-body" class="openSans">
                         <div class="panel-body-text">
-                            <ul style="font-size: 22px;">
-                                <li><a href={{url('/admin/invisibleitems')}}>Publish or reject hidden items</a></li>
-                                <li><a href={{url('/admin/itemrequests')}}>View items with unhandled requests</a></li>
-                                <li><a href={{url('/admin/users')}}>Manage users of the system</a></li>
+                            <ul style="font-size: 22px;padding:0;list-style-type:none;">
+                                <li>
+                                    <a href={{url('/admin/invisibleitems')}}>
+                                        <div class="homeItem homeItemHidden">
+                                            <div class="homeItemImg hiddenBg" style="background-color: #6EACD5"></div>
+                                            <div class="homeItemText" style="background-color: #6EACD5">Publish/Remove Hidden Items</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href={{url('/admin/itemrequests')}}>
+                                        <div class="homeItem homeItemAttention">
+                                            <div class="homeItemImg attentionBg" style="background-color: #F09595"></div>
+                                            <div class="homeItemText" style="background-color: #F09595">Unhandled item claims</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href={{url('/admin/users')}}>
+                                        <div class="homeItem homeItemManage">
+                                            <div class="homeItemImg manageBg" style="background-color: #0495b0"></div>
+                                            <div class="homeItemText" style="background-color: #0495b0">Manage Users</div>
+                                        </div>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>                    
