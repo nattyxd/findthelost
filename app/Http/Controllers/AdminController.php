@@ -180,9 +180,6 @@ class AdminController extends Controller
         foreach($lostItemsValueArray as $lostItemValue){
             array_push($lostItemsArray, LostItem::find($lostItemValue));
         }
-        if($lostItemsArray[0] == null){
-            $lostItemsArray = null;
-        }
 
         return view('admin/itemrequests', ['lostItems' => $lostItemsArray]);
     }
