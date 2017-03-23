@@ -21,10 +21,9 @@
         </div>
     </div>
         <div id="lostItems">
-
-        @if (count($lostItems) == 0)
-        <div style="width: 100%; text-align: center; font-size: 32px; color: #000;font-weight: bold;color:#517445;">There are no more items waiting for your approval, nice!</div>
-        @endif
+        @if ($lostItems == null)
+        <div style="width: 100%; text-align: center; font-size: 32px; color: #000;font-weight: bold;color:#517445;">There are no items with unhandled claims, nice!</div>
+        @else
         @foreach ($lostItems as $item)  
         <div class="lostItem 
         <?php 
@@ -44,5 +43,6 @@
             </div>
         </div>
         @endforeach
+        @endif
     </div>
 @endsection

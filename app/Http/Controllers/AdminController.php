@@ -10,6 +10,7 @@ use App\LostItem;
 use App\ItemRequest;
 use App\User;
 use Session;
+use Mail;
 
 class AdminController extends Controller
 {
@@ -57,7 +58,11 @@ class AdminController extends Controller
         $associatedUser->trust = $associatedUser->trust + 100;
         $associatedUser->save();
 
-        // TODO: Email user telling them that it's been approved
+        // Send an email to let them know their item was successful
+        Mail::raw('Your item "' . $itemToApprove->title . '" has been approved and is now public! Log into filo now to view it.', function($m) use($associatedUser) {
+            $m->to($associatedUser->email);
+            $m->subject('filo : Item Approved!');
+        });
         
         $unapprovedItems = LostItem::where('approved', '!=', '1')->get();
         return redirect()->action('AdminController@approve')->with('success','Item with id "' . $id . '" was approved successfully!');
@@ -80,7 +85,11 @@ class AdminController extends Controller
 
         LostItem::destroy($id); // delete the item
 
-        // TODO: Email user telling them that their post was deleted
+        // Email user telling them that their post was deleted
+        Mail::raw('Your item "' . $itemToDestroy->title . '" was unfortunately not accepted into the filo system.', function($m) use($associatedUser) {
+            $m->to($associatedUser->email);
+            $m->subject('filo : Item Rejected');
+        });
 
         return redirect()->action('AdminController@approve')->with('success', 'Item with id "' . $id . '" was deleted successfully!');
     }
@@ -109,13 +118,19 @@ class AdminController extends Controller
         $itemToHide->save();
 
         // Thirdly - inform the user via email that their request was accepted
-        // TODO - Email
+        Mail::raw('Your item request to ' . $requestToApprove->item->title . ' was approved, congratulations! Log into filo now to arrange the collection of the item.', function($m) use ($requestToApprove) {
+            $m->to($requestToApprove->user->email);
+            $m->subject('filo : Request Approved!');
+        });
 
-        // Finally - inform the other users that their request was rejected
+        // Finally - inform the other users via email that their request was rejected
         $requestsToReject = ItemRequest::where('lost_item_id', $requestToApprove->lost_item_id)->where('id', '!=', $id)->get();
         foreach ($requestsToReject as $requestToReject){
             $this->rejectrequestid($requestToReject);
-            // TODO: Email the users who had the requests rejected
+            Mail::raw('Your item request to ' . $requestToApprove->item->title . ' was rejected.', function($m) use($requestToReject) {
+                $m->to($requestToReject->user->email);
+                $m->subject('filo : Request Rejected!');
+            });
         }
         return redirect()->action('GeneralController@viewid', ['id' => $requestToApprove->lost_item_id])->withSuccess('Successfully approved the selected item request!');
     }
@@ -134,6 +149,11 @@ class AdminController extends Controller
             $requestToReject->adminhandled = 1;
             $requestToReject->save();
 
+            Mail::raw('Your item request to ' . $requestToReject->item->title . ' was rejected.', function($m) use($requestToReject) {
+                $m->to($requestToReject->user->email);
+                $m->subject('filo : Request Rejected!');
+            });
+
             return redirect()->action('GeneralController@viewid', ['id' => $requestToReject->lost_item_id])->withSuccess('Successfully rejected the selected item request!');
         }
         else{
@@ -142,8 +162,6 @@ class AdminController extends Controller
             $LostItem->adminhandled = 1;
             $LostItem->save();
         }
-
-        // TODO: Email the user that had the request rejected
     }
 
     public function viewrequests(){
@@ -160,6 +178,9 @@ class AdminController extends Controller
 
         foreach($lostItemsValueArray as $lostItemValue){
             array_push($lostItemsArray, LostItem::find($lostItemValue));
+        }
+        if($lostItemsArray[0] == null){
+            $lostItemsArray = null;
         }
 
         return view('admin/itemrequests', ['lostItems' => $lostItemsArray]);
