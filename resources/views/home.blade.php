@@ -48,7 +48,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href={{url('/home/myitems')}}>
+                                    <a href={{url('/myitems')}}>
                                         <div class="homeItem homeItemMyItems">
                                             <div class="homeItemImg myItemsBg" style="background-color: #6EACD5"></div>
                                             <div class="homeItemText" style="background-color: #6EACD5">My items</div>
@@ -56,7 +56,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href={{url('/home/myaccount')}}>
+                                    <a href={{url('/myaccount')}}>
                                         <div class="homeItem homeItemMyAccount">
                                             <div class="homeItemImg myAccountBg" style="background-color: #6b363e"></div>
                                             <div class="homeItemText" style="background-color: #6b363e">My account</div>

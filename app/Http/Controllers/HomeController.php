@@ -269,4 +269,9 @@ class HomeController extends Controller
         $out['authenticated'] = false;
         return $out;
     }
+
+    public function myitems(){
+        $myItems = LostItem::where('user_id', '=', Auth::user()->id)->get();
+        return view('myitems', ['myItems' => $myItems]);
+    }
 }

@@ -33,6 +33,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/edit/{id}', 'HomeController@edit');
     Route::post('/edit/{id}', 'HomeController@submitedit');
     Route::post('/request/{id}', 'HomeController@submititemrequest');
+    Route::get('/myitems', 'HomeController@myitems');
+    Route::get('/myaccount', 'HomeController@myaccount');
 
     // Admin routes
     Route::group(['prefix' => 'admin'], function () {
