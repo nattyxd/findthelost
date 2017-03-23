@@ -7,6 +7,11 @@
 @stop
 
 @section('content')
+      <section id="pageTagline" style="margin-bottom: 50px">
+          <div class="thePageTagLine">
+            Reset password
+        </div>
+    </section>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
