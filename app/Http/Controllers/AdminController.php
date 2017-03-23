@@ -84,6 +84,7 @@ class AdminController extends Controller
         $associatedUser->save();
 
         LostItem::destroy($id); // delete the item
+        ItemRequest::where('lost_item_id', '=', $id)->delete(); // delete associated requests too
 
         // Email user telling them that their post was deleted
         Mail::raw('Your item "' . $itemToDestroy->title . '" was unfortunately not accepted into the filo system.', function($m) use($associatedUser) {
