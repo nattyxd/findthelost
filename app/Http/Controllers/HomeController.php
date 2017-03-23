@@ -274,4 +274,8 @@ class HomeController extends Controller
         $myItems = LostItem::where('user_id', '=', Auth::user()->id)->get();
         return view('myitems', ['myItems' => $myItems]);
     }
+
+    public function myaccount(){
+        return view('myaccount', ['user' => Auth::user()]);
+    }
 }

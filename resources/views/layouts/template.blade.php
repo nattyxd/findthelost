@@ -23,7 +23,12 @@
 </head>
 <body>
     <header>
-      <div id="logo"><a href={{url('/')}}><span class="logoGreen italic openSans reducedSpacing">fi</span><span class="italic openSans">l</span><span class="italic openSans minus2px">o</span><span style="font-size: 50%;">&nbsp;</span>:<span style="font-size: 50%;">&nbsp;</span><span class="logoGreen veryReducedSpacing">find</span><span class="minus2px reducedSpacing">the</span><span class="minus3px veryReducedSpacing" style="font-weight: 300;">lost</span></a></div>
+      <div id="logo">@if(Auth::user())
+        <a href={{url('/home')}}>
+        @else
+        <a href={{url('/')}}>
+        @endif
+        <span class="logoGreen italic openSans reducedSpacing">fi</span><span class="italic openSans">l</span><span class="italic openSans minus2px">o</span><span style="font-size: 50%;">&nbsp;</span>:<span style="font-size: 50%;">&nbsp;</span><span class="logoGreen veryReducedSpacing">find</span><span class="minus2px reducedSpacing">the</span><span class="minus3px veryReducedSpacing" style="font-weight: 300;">lost</span></a></div>
       <nav class="openSans">
         <ul>
           <li><a href="{{url('lostitems')}}">View Items</a></li>
