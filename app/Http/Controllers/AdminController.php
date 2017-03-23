@@ -146,11 +146,6 @@ class AdminController extends Controller
         // TODO: Email the user that had the request rejected
     }
 
-    // Show the page where admins can edit items
-    public function editwithid($id){
-        dd("403"); // TODO: Implement
-    }
-
     public function viewrequests(){
         $itemRequests = ItemRequest::where('adminhandled', '!=', '1')->get();
         $lostItemsValueArray = [];
