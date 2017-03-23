@@ -45,5 +45,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/itemrequests/approve/{id}', 'AdminController@approverequestid');
         Route::post('/itemrequests/reject/{id}', 'AdminController@rejectrequestid');
         Route::get('/itemrequests', 'AdminController@viewrequests');
+        Route::get('/users', 'AdminController@manageusers');
+        Route::post('deleteuser/{id}', 'AdminController@deleteuserid');
     });
 });

@@ -8,6 +8,7 @@ use Illuminate\Validation\Rule;
 use Auth;
 use App\LostItem;
 use App\ItemRequest;
+use App\User;
 use Session;
 
 class AdminController extends Controller
@@ -81,7 +82,7 @@ class AdminController extends Controller
 
         // TODO: Email user telling them that their post was deleted
 
-        return redirect()->action('AdminController@approve')->with('success', 'Item with id"' . $id . '" was deleted successfully!');
+        return redirect()->action('AdminController@approve')->with('success', 'Item with id "' . $id . '" was deleted successfully!');
     }
 
     // if a smart user tries to do a post request they may end up here, show them error page
@@ -167,5 +168,16 @@ class AdminController extends Controller
         }
 
         return view('admin/itemrequests', ['lostItems' => $lostItemsArray]);
+    }
+
+    public function manageusers(){
+        $users = User::paginate(15);
+        return view ('admin/users', ['users' => $users]);
+    }
+
+    public function deleteuserid($id){
+        $user = User::find($id);
+        $user->delete();
+        return redirect()->action('AdminController@manageusers');
     }
 }

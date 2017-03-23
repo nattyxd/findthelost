@@ -45,24 +45,12 @@
                     <div class="panel-body" class="openSans">
                         <div class="panel-body-text">
                             <ul style="font-size: 22px;">
-                                <li><a href={{url('/admin/invisibleitems')}}>Approve or reject items</a></li>
+                                <li><a href={{url('/admin/invisibleitems')}}>Publish or reject hidden items</a></li>
                                 <li><a href={{url('/admin/itemrequests')}}>View items with unhandled requests</a></li>
-                                <li><a href={{url('/admin/invisibleitems')}}>View/Edit/Message a user of the system</a></li>
-                                
+                                <li><a href={{url('/admin/users')}}>Manage users of the system</a></li>
                             </ul>
                         </div>
-                    </div>
-
-                    <div class="panel-heading">
-                        <div class="panel-heading-text"><img src="img/cog.svg" width="35" height="35"/>View/Edit/Message Users</div>
-                    </div>
-                    <div class="panel-body" class="openSans">
-                        <div class="panel-body-text">
-                            Hello
-                        </div>
-                    </div>
-
-                    
+                    </div>                    
                     @endif
 
                     

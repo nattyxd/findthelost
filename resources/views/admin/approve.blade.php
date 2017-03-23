@@ -6,7 +6,7 @@
 
       <section id="pageTagline">
           <div class="thePageTagLine">
-            Approve and reject items
+            Invisible Items
         </div>
     </section>
     <div class="container-fluid">
@@ -14,7 +14,7 @@
             <div class="col-xl-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <div class="panel-heading-text"><img src="../img/magnify.svg" width="35" height="35"/>Waiting for your approval</div>
+                        <div class="panel-heading-text"><img src="../img/magnify.svg" width="35" height="35"/>Not visible to the public</div>
                     </div>
                 </div>
             </div>
@@ -52,6 +52,7 @@
                 {{ csrf_field() }}
                 <input type="submit" class="btn btn-danger" style="font-size: 26px;" value="&#10007;" />
                 </form>                
+                <a href="../view/{{$item->id}}"><button type="button" class="btn btn-primary" style="font-size: 22px;height:55px;">More Details</button></a>
             </div>
         </div>
         @endforeach
