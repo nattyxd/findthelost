@@ -132,7 +132,7 @@
     </div>
     <div id="lostItems">
     @if (count($lostItems) == 0)
-        <div style="width: 100%; text-align: center; font-size: 32px; color: #000;font-weight: bold;padding-bottom: 30px;">Oh no! Try searching with different parameters, or subscribe to this feed using Pusher.</div>
+        <div style="width: 100%; text-align: center; font-size: 32px; color: #000;font-weight: bold;padding-bottom: 30px;">Oh no! Try searching with different parameters.</div>
     @endif
     @foreach ($lostItems as $item)  
         <div class="lostItem 
