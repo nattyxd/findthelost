@@ -13,4 +13,8 @@ class ItemRequest extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function item(){
+        return $this->hasOne('App\LostItem', 'id', 'lost_item_id');
+    }
 }

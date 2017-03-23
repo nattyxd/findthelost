@@ -102,10 +102,15 @@ class AdminController extends Controller
         $requestToApprove->adminhandled = 1;
         $requestToApprove->save();
 
-        // Secondly - inform the user via email that their request was accepted
+        // Secondly - Mark the item no longer suitable for public viewing now that it has been approved
+        $itemToHide = $requestToApprove->item;
+        $itemToHide->approved = 0;
+        $itemToHide->save();
+
+        // Thirdly - inform the user via email that their request was accepted
         // TODO - Email
 
-        // Secondly - inform the other users that their request was rejected
+        // Finally - inform the other users that their request was rejected
         $requestsToReject = ItemRequest::where('lost_item_id', $requestToApprove->lost_item_id)->where('id', '!=', $id)->get();
         foreach ($requestsToReject as $requestToReject){
             $requestToReject->approved = 0;
@@ -124,5 +129,11 @@ class AdminController extends Controller
     // Show the page where admins can edit items
     public function editwithid($id){
         dd("403"); // TODO: Implement
+    }
+
+    public function viewrequests(){
+        $itemRequests = ItemRequest::all();
+        dd($itemRequests);
+        return view('admin/itemrequests');
     }
 }

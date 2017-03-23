@@ -44,5 +44,6 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('edit/{id}', 'AdminController@editwithid');
         Route::post('/itemrequests/approve/{id}', 'AdminController@approverequestid');
         Route::post('/itemrequests/reject/{id}', 'AdminController@rejectitemid');
+        Route::get('/itemrequests', 'AdminController@viewrequests');
     });
 });
