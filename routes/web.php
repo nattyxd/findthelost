@@ -43,7 +43,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('invisibleitems/reject/{id}', 'AdminController@rejectid');
         Route::get('edit/{id}', 'AdminController@editwithid');
         Route::post('/itemrequests/approve/{id}', 'AdminController@approverequestid');
-        Route::post('/itemrequests/reject/{id}', 'AdminController@rejectitemid');
+        Route::post('/itemrequests/reject/{id}', 'AdminController@rejectrequestid');
         Route::get('/itemrequests', 'AdminController@viewrequests');
     });
 });

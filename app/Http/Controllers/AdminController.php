@@ -113,15 +113,34 @@ class AdminController extends Controller
         // Finally - inform the other users that their request was rejected
         $requestsToReject = ItemRequest::where('lost_item_id', $requestToApprove->lost_item_id)->where('id', '!=', $id)->get();
         foreach ($requestsToReject as $requestToReject){
-            $requestToReject->approved = 0;
-            $requestToReject->adminhandled = 1;
-            $requestToReject->save();
+            $this->rejectrequestid($requestToReject);
             // TODO: Email the users who had the requests rejected
         }
         return redirect()->action('GeneralController@viewid', ['id' => $requestToApprove->lost_item_id])->withSuccess('Successfully approved the selected item request!');
     }
 
-    public function rejectitemid($id){
+    public function rejectrequestid($LostItem){
+        if(is_numeric($LostItem)){
+            // called method with a numeric ID, need to perform SQL request
+            $requestToReject = ItemRequest::find($LostItem);
+
+            if(!$requestToReject){
+                abort(400); // in case they somehow submit an request that doesn't exist
+            }
+
+            // Firstly - reject the item in question
+            $requestToReject->approved = 0;
+            $requestToReject->adminhandled = 1;
+            $requestToReject->save();
+
+            return redirect()->action('GeneralController@viewid', ['id' => $requestToReject->lost_item_id])->withSuccess('Successfully rejected the selected item request!');
+        }
+        else{
+            // called method with a LostItem variable, can modify item without SQL
+            $LostItem->approved = 0;
+            $LostItem->adminhandled = 1;
+            $LostItem->save();
+        }
 
         // TODO: Email the user that had the request rejected
     }
@@ -132,8 +151,21 @@ class AdminController extends Controller
     }
 
     public function viewrequests(){
-        $itemRequests = ItemRequest::all();
-        dd($itemRequests);
-        return view('admin/itemrequests');
+        $itemRequests = ItemRequest::where('adminhandled', '!=', '1')->get();
+        $lostItemsValueArray = [];
+        $lostItemsArray = [];
+
+        // TODO : Inefficient - http://stackoverflow.com/questions/42965257/laravel-eloquent-orm-filtering-results-by-distinct-values-in-another-column
+        foreach ($itemRequests as $itemRequest){
+            if(!in_array($itemRequest->lost_item_id, $lostItemsValueArray)){
+                array_push($lostItemsValueArray, $itemRequest->lost_item_id);
+            }
+        }
+
+        foreach($lostItemsValueArray as $lostItemValue){
+            array_push($lostItemsArray, LostItem::find($lostItemValue));
+        }
+
+        return view('admin/itemrequests', ['lostItems' => $lostItemsArray]);
     }
 }

@@ -140,9 +140,9 @@
                                                     {!! Form::open(['action' => array('AdminController@approverequestid', $request->id)]) !!}
                                                         <input type="submit" class="btn btn-success" style="font-size: 26px;width:80px;height:80px;float:left;margin-right:10px;" value="&#10003;" />
                                                     {!! Form::close() !!}
-                                                    <form method="POST" action="/admin/invisibleitems/reject/{{$request->id}}" style="display:inline-block;">
+                                                    {!! Form::open(['action' => array('AdminController@rejectrequestid', $request->id)]) !!}
                                                         <input type="submit" class="btn btn-danger" style="font-size: 26px;width:80px;height:80px;float:left;" value="&#10007;" />
-                                                    </form>  
+                                                     {!! Form::close() !!}
                                                     @endif
                                                 </div>
                                             </div>

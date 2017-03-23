@@ -46,6 +46,7 @@
                         <div class="panel-body-text">
                             <ul style="font-size: 22px;">
                                 <li><a href={{url('/admin/invisibleitems')}}>Approve or reject items</a></li>
+                                <li><a href={{url('/admin/itemrequests')}}>View items with unhandled requests</a></li>
                                 <li><a href={{url('/admin/invisibleitems')}}>View/Edit/Message a user of the system</a></li>
                                 
                             </ul>
