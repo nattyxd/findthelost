@@ -14,7 +14,7 @@
             <div class="col-xl-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <div class="panel-heading-text"><img src="../img/magnify.svg" width="35" height="35"/>Items you've added</div>
+                        <div class="panel-heading-text"><img src="../img/eye.svg" width="35" height="35"/>Items you've added</div>
                     </div>
                 </div>
             </div>
@@ -45,6 +45,8 @@
                 <p style="margin-top: -16px;font-size:22px;"><img src="../img/calendar.svg" width="25" height="25" style="float:left; margin-top:5px;margin-right: 10px;margin-left: 2px;"/>{{$item->created_at}}</p>
                 <p style="font-size: 22px;font-weight: lighter;">{{$item->description}}</p>
                 <a href="../view/{{$item->id}}"><button type="button" class="btn btn-primary" style="font-size: 22px;height:55px;">More Details</button></a>
+                <a href="../edit/{{$item->id}}"><button type="button" class="btn btn-primary" style="font-size: 22px;height:55px;">Edit Item</button></a>
+                
             </div>
         </div>
         @endforeach

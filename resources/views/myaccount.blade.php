@@ -14,7 +14,7 @@
             <div class="col-xl-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <div class="panel-heading-text"><img src="../img/magnify.svg" width="35" height="35"/>View your account information</div>
+                        <div class="panel-heading-text"><img src="../img/eye.svg" width="35" height="35"/>View your account information</div>
                     </div>
                     <div class="panel-body" class="openSans">
                         <div class="panel-body-text">

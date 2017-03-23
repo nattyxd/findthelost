@@ -13,7 +13,7 @@
             <div class="col-xl-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <div class="panel-heading-text"><img src="../img/cog.svg" width="35" height="35"/>Quick Actions</div>
+                        <div class="panel-heading-text"><img src="../img/cog.svg" width="35" height="35"/>User Accounts</div>
                     </div>
                     <div class="panel-body" class="openSans">
                         <div class="panel-body-text">

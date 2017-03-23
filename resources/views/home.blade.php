@@ -8,7 +8,7 @@
             {!! strstr(Auth::user()->name . ' ', ' ', true ) !!} 's Dashboard
         </div>
     </section>
-    <div class="alert alert-warning" style="font-size: 32px;margin-bottom:0px;text-align:center;">
+    <div class="alert alert-warning safetyAlert">
         <strong>Stay safe!</strong> For your safety, please only meet up with filo members in busy public locations.
     </div>
     @if ((Auth::user()->trust < 200) && (Auth::user()->userlevel !== 1))

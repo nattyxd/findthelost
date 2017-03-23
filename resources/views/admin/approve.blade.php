@@ -14,7 +14,7 @@
             <div class="col-xl-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <div class="panel-heading-text"><img src="../img/magnify.svg" width="35" height="35"/>Not visible to the public</div>
+                        <div class="panel-heading-text"><img src="../img/eye.svg" width="35" height="35"/>Not visible to the public</div>
                     </div>
                 </div>
             </div>

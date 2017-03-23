@@ -470,6 +470,12 @@ input[type=file]{
 }
 /* end style descriptors for dashboard */
 
+.safetyAlert{
+  font-size: 32px;
+  margin-bottom:0px;
+  text-align:center;
+}
+
 @media only screen and (max-width: 1300px) {
     header{
       display: block;
@@ -598,6 +604,10 @@ input[type=file]{
 
   .responsiveCoreContent{
     font-size: 18px !important;
+  }
+
+  main div.alert.alert-warning.safetyAlert{
+    font-size: 19px;
   }
 }
 
