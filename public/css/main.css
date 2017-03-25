@@ -365,7 +365,7 @@ form .floatLeft{
   float: left;
 }
 
-.checkbox-inline input[type=checkbox], .checkbox input[type=checkbox], .radio-inline input[type=radio], .radio input[type=radio]{
+.radio-inline input[type=radio], .radio input[type=radio]{
   position: relative;
   margin-left: -35px;
   margin-bottom: 30px;
@@ -507,7 +507,7 @@ input[type=file]{
 
     nav ul li{
       display:inline;
-      width: calc(33.3333% - 5px);
+      width: 33.3%;
       font-size: 80%;
       position: relative;
       margin: auto;
@@ -554,6 +554,10 @@ input[type=file]{
   footer p{
     font-size: 12px;
     line-height: 25px;
+  }
+  .col-md-8>.panel-default>.panel-heading{
+    font-size: 22px;
+    line-height: 56px;
   }
 }
 
@@ -616,6 +620,16 @@ input[type=file]{
   .panel-default>.panel-body>.panel-body-text.lostItemForm{
     width: 100%;
   }
+  .searchButton{
+    font-size: 20px;
+    padding: 0;
+  }
+  .searchButton button{
+    margin: -15px auto 0px auto;
+    padding: 0;
+    display: block;
+    width: 200px;
+  }
 }
 
 @media only screen and (max-width: 530px){
@@ -648,6 +662,10 @@ input[type=file]{
 
   .panel-default>.panel-body>.panel-body-text{
     width: 100%;
+  }
+  .col-md-8>.panel-default>.panel-heading{
+    font-size: 16px;
+    line-height: 50px;
   }
 }
 
@@ -844,4 +862,12 @@ input[type=file]{
     margin-left: 50px;
   }
 
+  .col-md-8>.panel-default>.panel-heading{
+    font-size: 10px;
+    line-height: 40px;
+  }
+
+  .form-group{
+    font-size: 16px;
+  }
 }
