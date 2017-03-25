@@ -31,16 +31,16 @@
         <span class="logoGreen italic openSans reducedSpacing">fi</span><span class="italic openSans">l</span><span class="italic openSans minus2px">o</span><span style="font-size: 50%;">&nbsp;</span>:<span style="font-size: 50%;">&nbsp;</span><span class="logoGreen veryReducedSpacing">find</span><span class="minus2px reducedSpacing">the</span><span class="minus3px veryReducedSpacing" style="font-weight: 300;">lost</span></a></div>
       <nav class="openSans">
         <ul>
-          <li><a href="{{url('lostitems')}}">View Items</a></li>
+          <a href="{{url('lostitems')}}"><li>View Items</li></a>
           <?php
               $user = Auth::user();
               if($user == null){
-                echo '<li><a href="' . route('login') . '">Log In</a></li>';
-                echo '<li><a href="' . route('register') . '">Register</a></li>';
+                echo '<a href="' . route('login') . '"><li>Log In</li></a>';
+                echo '<a href="' . route('register') . '"><li>Register</li></a>';
               }
               else{
-                echo "<li><a href='" . url("/home") . "'><img src='". asset('img/generic_user.svg') . "' width='40' height='40' /> &nbsp; My Dashboard</li>";
-                echo '<li><a href="' . route('logout') . '">Logout</a></li>';
+                echo "<a href='" . url("/home") . "'><li><img src='". asset('img/generic_user.svg') . "' width='40' height='40' /> &nbsp; My Dashboard</li></a>";
+                echo '<a href="' . route('logout') . '"><li>Logout</li></a>';
               }
             ?>
         </ul>

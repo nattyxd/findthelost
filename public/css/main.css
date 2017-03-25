@@ -107,11 +107,9 @@ nav ul {
 
 nav ul li {
   float: left;
-  margin-right: 30px;
 }
 
 nav ul li a {color: white;
-    padding: 0 10px;
     text-decoration: none;
 }
 
@@ -476,6 +474,12 @@ input[type=file]{
   text-align:center;
 }
 
+@media only screen and (min-width: 1300px){
+  nav ul li{
+    padding: 0 30px;
+  }
+}
+
 @media only screen and (max-width: 1300px) {
     header{
       display: block;
@@ -509,9 +513,6 @@ input[type=file]{
       margin: auto;
     }
 
-    nav ul li:first-child{
-      margin-left: 15px;
-    }
 
     nav ul li a{
     }
